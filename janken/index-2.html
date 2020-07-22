@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <h1>vue.jsの基本構文を使用したジャンケンゲーム</h1>
+        <p>このゲームはvue.jsの基本構文を使用した簡単なゲームです。<br>
+        少し手間取ったところは、ifを使用したジャンケンの出目と結果の<br>
+        表示です。基本構文のいい実践的理解になりました。</p>
+
+        <h2>{{result}}</h2>
+        <div>
+            <img :src="enemyHandImage" alt="" :width="width">
+        </div>
+        <button @click="fight('goo')"><img src="goo.jpg" alt="" width="50px"></button>
+        <button @click="fight('choki')"><img src="choki.jpg" alt="" width="50px"></button>
+        <button @click="fight('paa')"><img src="paa.jpg" alt="" width="50px"></button>
+    </div>
+
+    <script src="vue.js"></script>
+  <script>
+        new Vue({
+	el: '#app',
+  data: {
+      width: 250,
+      result: '圧倒的ジャンケンゲームッッッ！！！！',
+      hand: ['goo', 'choki', 'paa'],
+      enemyHand: '',
+      enemyHandImage: ''
+  },
+  methods:{
+  fight: function(myHand){
+    // 敵の手をランダム決める
+    // 0　1　2のいずれかの数字をランダムに生成する
+    var index = Math.floor(Math.random() * Math.floor(3));
+    this.enemyHand = this.hand[index];
+
+    // 自分の手と敵の手を比較する
+    console.log('敵の手：'+this.enemyHand);
+    console.log('自分の手：'+myHand);
+    if(this.enemyHand === 'goo'){
+         this.enemyHandImage='goo.jpg'; 
+        }else if(this.enemyHand === 'paa'){
+            this.enemyHandImage='paa.jpg';
+        }else if(this.enemyHand === 'choki'){
+            this.enemyHandImage='choki.jpg';
+        }
+
+    // 引き分け判定
+    if(myHand === this.enemyHand){
+        console.log('このあいこ俺のが流れを変えるッッ！！！！');
+        this.result = 'このあいこ俺のが流れを変えるッッ！！！！';
+    }
+
+    // 勝ち判定
+    if(this.enemyHand === 'goo' && myHand === 'paa'){
+        console.log('圧倒的勝利ッッ！！！！');
+        this.result = '圧倒的勝利ッッ！！！！';
+    }
+    if(this.enemyHand === 'paa' && myHand === 'choki'){
+        console.log('圧倒的勝利ッッ！！！！');
+        this.result = '圧倒的勝利ッッ！！！！';
+    }    
+    if(this.enemyHand === 'choki' && myHand === 'goo'){
+        console.log('圧倒的勝利ッッ！！！！');
+        this.result = '圧倒的勝利ッッ！！！！';
+    }
+
+    // 負け判定
+    if(this.enemyHand === 'goo' && myHand === 'choki'){
+        console.log('悪魔的敗北ゥゥゥ！！！！');
+        this.result = '悪魔的敗北ゥゥゥ！！！！';
+    }
+    if(this.enemyHand === 'paa' && myHand === 'goo'){
+        console.log('悪魔的敗北ゥゥゥ！！！！');
+        this.result = '悪魔的敗北ゥゥゥ！！！！';
+    }    
+    if(this.enemyHand === 'choki' && myHand === 'paa'){
+        console.log('悪魔的敗北ゥゥゥ！！！！');
+        this.result = '悪魔的敗北ゥゥゥ！！！！';
+    }
+
+  }
+}
+})
+    </script>
+</body>
+</html>
